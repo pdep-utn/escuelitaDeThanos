@@ -12,6 +12,11 @@ data Personaje = Personaje {
   energia::Float
 } deriving (Show)
 
+{- Alternativa
+type Material = String
+type Guantelete = (Material,[Gema])
+-}
+
 data Guantelete = Guantelete {
     material :: String,
     gemas :: [Gema]
@@ -34,7 +39,19 @@ reducirMitad universo = take (length universo `div` 2) universo
 puedeUsarse:: Guantelete -> Bool
 puedeUsarse guantelete = ((==6).length.gemas) guantelete && ((=="uru").material) guantelete
 
-{- Punto 2 Modelar las gemas:
+-- Punto 2 orden superior! 
+
+{- Saber si un universo es apto para pendex, que ocurre si alguno los personajes que lo integran tienen menos de 45 años.-}
+
+universoDePendex :: Universo -> Bool 
+universoDePendex = any $ (<=45).edad
+
+
+{-Saber la energía total de un universo que es la sumatoria de todas las energías de sus integrantes que tienen más de una habilidad.-}
+energiaTotalDelUniverso :: Universo -> Float 
+energiaTotalDelUniverso = sum.map energia.filter ((>0).length.habilidades)
+
+{- Punto 3 Modelar las gemas:
 
 mente = debilita energía del usuario
 -} 
@@ -88,25 +105,13 @@ esDigno deseo personaje  = (energia personaje) > (energia.deseo) personaje
 
 realidadLoca personaje = realidad (\personaje -> personaje {energia = 3}) personaje
 
-{- Punto 3
+{- Punto 4
 usar guante contra un personaje => ejecuta las gemas que tiene 
 -}
 usar :: [Gema] -> Gema
 usar gemas destinatario = foldr ($) destinatario $ gemas  
 
--- Punto 4 orden superior! 
-
-{- Saber si un universo es de jovatos, que ocurre si todos los personajes que lo integran tienen más de 70 años.-}
-
-universoDeJovatos :: Universo -> Bool 
-universoDeJovatos = all $ (>=70).edad
-
-
-{-Saber la energía total de un universo que es la sumatoria de todas las energías de sus integrantes que tienen más de una habilidad.-}
-energiaTotalDelUniverso :: Universo -> Float 
-energiaTotalDelUniverso = sum.map energia.filter ((>0).length.habilidades)
-
-{-
+{- Punto 5
 Gema más poderosa
 -}
 
@@ -120,7 +125,7 @@ gemaMasPoderosaDe personaje (gema1:gema2:gemas)
     | otherwise = gemaMasPoderosaDe personaje (gema2:gemas)
 
 
-{- Punto 6 evaluación diferida-}
+{- Punto 6 evaluación diferida -}
 infinitasGemas :: Gema -> [Gema]
 infinitasGemas gema = gema:(infinitasGemas gema)
 
