@@ -1,7 +1,5 @@
-# ejercicio-alumno
+# Parcial Escuelita de Thanos
 
-## Integrantes
+[![Build Status](https://travis-ci.com/pdep-utn/escuelitaDeThanos.svg?token=7kn2iattJERWx3nrSmdM&branch=master)](https://travis-ci.com/pdep-utn/escuelitaDeThanos)
 
-- integrante1 (usuario github)
-- integrante2 (usuario github)
-...
+[Enunciado del parcial](https://docs.google.com/document/d/1IKrJkdbPyoxfHqREIfqzxpsBdANcL2g9gvs9t-IR30E/edit?usp=sharing)

@@ -126,4 +126,5 @@ main = hspec $ do
   
   describe "Testeo de gema más poderosa" $ do
     it "Dada una lista de gemas entonces se obtiene la más poderosa" $ do 
-      (energia.(gemaMasPoderosa drStrange guanteleteDeGoma)) drStrange `shouldBe` 0
+      (energia.(gemaMasPoderosa drStrange guanteleteDeGoma)) drStrange `shouldBe` 0 --la gema del poder quita los poderes
+  
